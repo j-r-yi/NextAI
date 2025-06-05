@@ -68,3 +68,4 @@ const PdfUploader = () => {
     </Dragger>
   );
 };
+export default PdfUploader;
