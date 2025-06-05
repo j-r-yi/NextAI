@@ -60,3 +60,4 @@ const RenderQA = (props) => {
     </>
   );
 };
+export default RenderQA;
