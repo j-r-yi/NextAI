@@ -17,8 +17,8 @@ const uploadToBackend = async (file) => {
       },
     });
     return response;
-  } catch (err) {
-  } finally {
+  } catch (error) {
+    console.error('Error uploading file: ', error);
     return null;
   }
 };
@@ -26,14 +26,15 @@ const uploadToBackend = async (file) => {
 // Attributes to pass to antd dragger later
 const attributes = {
   name: 'file',
-  // Allow multiple uploads at once? Code only accepts first pdf
-  multiple: false,
+  multiple: true,
   customRequest: async ({ file, onSuccess, onError }) => {
     const response = await uploadToBackend(file);
     if (response && response.status === 200) {
+      // Handle success
       onSuccess(response.data);
     } else {
-      onError(new Error('upload failed'));
+      // Handle error
+      onError(new Error('Upload failed'));
     }
   },
   onChange(info) {
