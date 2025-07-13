@@ -37,9 +37,51 @@ This project is a full-stack application that enables users to upload a PDF, ask
 
 ## Getting Started
 
-### 1. Clone the repo
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/pdf-chat-assistant.git
-cd pdf-chat-assistant
+git clone https://github.com/your-username/nextai.git
+cd nextai
 ```
+
+### 2. Install Dependencies
+
+Install dependencies for both frontend and backend:
+
+```bash
+npm install
+cd server && npm install
+cd ..
+```
+
+### 3. Start Development Mode
+
+Start both the React frontend and backend server concurrently:
+
+```bash
+npm run dev
+```
+
+- Frontend runs on: http://localhost:3000
+- Backend should be set to run from the `server` directory
+
+---
+
+## Available Scripts
+
+From the root of the project:
+
+| Command           | Description                                  |
+|------------------|----------------------------------------------|
+| `npm start`       | Runs only the React frontend                 |
+| `npm run server`  | Runs only the backend server                 |
+| `npm run dev`     | Runs both frontend and backend concurrently |
+| `npm run build`   | Builds the React app for production          |
+| `npm test`        | Runs tests using Jest                        |
+| `npm run eject`   | Ejects from CRA (not reversible)             |
+
+From the `server/` directory:
+
+| Command       | Description                   |
+|---------------|-------------------------------|
+| `npm start`   | Starts the backend server      |
