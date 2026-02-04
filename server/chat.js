@@ -6,7 +6,6 @@ import { ChatOpenAI } from 'langchain/chat_models/openai';
 import { PromptTemplate } from 'langchain/prompts';
 
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
-import { text } from 'express';
 
 // specifies default pdf is user doesn't provide one
 const chat = async (filePath = './uploads/hbs-lean-startup.pdf', query) => {
@@ -32,7 +31,7 @@ const chat = async (filePath = './uploads/hbs-lean-startup.pdf', query) => {
 
   const vectorStore = await MemoryVectorStore.fromDocuments(
     splitDocs,
-    embeddings
+    embeddings,
   );
 
   // Step 4: Check Retrieved Relevant Docs
@@ -42,18 +41,18 @@ const chat = async (filePath = './uploads/hbs-lean-startup.pdf', query) => {
 
   // Step 5: Question Answer
   const model = new ChatOpenAI({
-    modelName: 'gpt-3.5-turbo',
-    // modelName: 'gpt-4o-mini',
+    modelName: 'gpt-5-mini',
     openAIApiKey: process.env.REACT_APP_OPENAI_API_KEY,
   });
 
   const template = `Use the following pieces of context to answer the question at the end.
-If you don't know the answer, just say that you don't know, don't try to make up an answer.
-Use three sentences maximum and keep the answer as concise as possible.
 
 {context}
 Question: {question}
 Helpful Answer:`;
+
+  // If you don't know the answer, just say that you don't know, don't try to make up an answer.
+  // Use three sentences maximum and keep the answer as concise as possible.
 
   const chain = RetrievalQAChain.fromLLM(model, vectorStore.asRetriever(), {
     prompt: PromptTemplate.fromTemplate(template),
